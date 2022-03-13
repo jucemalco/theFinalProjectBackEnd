@@ -85,3 +85,20 @@ class Match(db.Model):
     "user_id": self.user_id,
     "book:id": self.book_id
         }
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(100), nullable=False)
+    autor = db.Column(db.String(10), nullable=False)
+    editorial = db.Column(db.String(10), nullable=False)
+    
+    def _repr_(self):
+        return "<Product %r>" % self.title
+
+    def serialize(self):
+        return {
+            "id":self.id,
+            "title": self.title,
+            "autor":self.autor,
+            "editorial": self.editorial
+        }
