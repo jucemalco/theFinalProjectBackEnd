@@ -60,10 +60,12 @@ def create_product():
     title = request.json.get("title")
     autor = request.json.get("autor")
     editorial = request.json.get("editorial")
+    review = request.json.get("review")
 
     product.title = title
     product.autor = autor 
     product.editorial = editorial
+    product.review = review
 
     if title == "":
         return jsonify({
