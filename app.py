@@ -104,6 +104,29 @@ def get_profile():
 # #FALTA EL DELETE PARA ELIMINAR USUARIO
 
 
+@app.route("/product", methods = ["POST"])
+def create_product():
+    product = Product()
+    title = request.json.get("title")
+    autor = request.json.get("autor")
+    editorial = request.json.get("editorial")
+    review = request.json.get("review")
+
+    product.title = title
+    product.autor = autor 
+    product.editorial = editorial
+    product.review = review
+
+    if title == "":
+        return jsonify({
+            "msg": "Title cannot be empty"
+        }), 400
+    
+    db.session.add(product)
+    db.session.commit()
+
+    return jsonify(product.serialize()), 200
+
 @app.route("/products", methods = ["GET"])
 def get_products():
     products = Product.query.all()
