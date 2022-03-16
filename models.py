@@ -91,6 +91,7 @@ class Product(db.Model):
     title = db.Column(db.String(100), nullable=False)
     autor = db.Column(db.String(10), nullable=False)
     editorial = db.Column(db.String(10), nullable=False)
+    review = db.Column(db.String(250), nullable=False)
     
     def _repr_(self):
         return "<Product %r>" % self.title
@@ -100,6 +101,6 @@ class Product(db.Model):
             "id":self.id,
             "title": self.title,
             "autor":self.autor,
-            "editorial": self.editorial
+            "editorial": self.editorial,
+            "review": self.review
         }
-
