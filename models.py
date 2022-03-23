@@ -63,7 +63,7 @@ class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     favorite = db.Column(db.String(250))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
-    categories = db.relationship('Category', secondary=categories, lazy='subquery',
+    categories = db.relationship('Category', secondary='categories', lazy='subquery',
         backref=db.backref('favorites', lazy=True))
    
 
@@ -84,7 +84,7 @@ class Match(db.Model):
     book_id_to = db.Column(db.String(250),nullable=False)
     status = db.Column(db.String(250), nullable=False)
     book_id = db.Column(db.String(250),nullable=False)
-    products = db.relationship('Product', secondary=products, lazy='subquery', backref=db.backref('matches', lazy=True))
+    products = db.relationship('Product', secondary='products', lazy='subquery', backref=db.backref('matches', lazy=True))
 
     def _repr_ (self):
         return '<Match %r>' % self.match
@@ -105,6 +105,7 @@ class Product(db.Model):
     
     autor = db.Column(db.String(10), nullable=False)
     editorial = db.Column(db.String(10), nullable=False)
+    review = db.Column(db.String(200), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
 
     
