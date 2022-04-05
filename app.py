@@ -194,31 +194,6 @@ def update_product(id):
         else: return jsonify({"msg":"Not found"}), 404
 
 
-@app.route("/product", methods = ["POST"])
-def create_product():
-    product = Product()
-    title = request.json.get("title")
-    autor = request.json.get("autor")
-    editorial = request.json.get("editorial")
-    review = request.json.get("review")
-    user_id = request.json.get("user_id")
-
-    product.title = title
-    product.autor = autor 
-    product.editorial = editorial
-    product.review = review
-    product.user_id = user_id
-
-    if title == "":
-        return jsonify({
-            "msg": "Title cannot be empty"
-        }), 400
-    
-    db.session.add(product)
-    db.session.commit()
-
-    return jsonify(product.serialize()), 200
-
 @app.route("/auth/google", methods=["POST"])
 def authGoogle():
     token_request = google.auth.transport.requests.Request(session=session)
